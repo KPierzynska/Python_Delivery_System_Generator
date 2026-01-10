@@ -95,32 +95,31 @@ def createWaybillsToOrder(df_ItemToOrder=pd.DataFrame()):
             df_num += 1
     return waybill_df
 
-
-# tworzenie ramki danych łączącą statusy przesyłek z listami przewozowymi
+# creating a data frame that connects shipment statuses with waybills
 def createStatusToWaybills(df_Waybills=pd.DataFrame()):
     status_df = pd.DataFrame(columns=['waybill', 'status', 'date'])
     df_num = 0
     statuses = ['waybill wygenerowany', 'nadano', 'w drodze', 'dostarczono', 'odebrano']
     for i in df_Waybills['waybill'].unique():
         first_date = fake.date_time_between(start_date='-1y', end_date='now')
-        # w przypadku 95% przesyłek, których pierwszy status pojawił się więcej niż 20 dni temu, paczki mają status "odebrano"
+        # for 95% of shipments whose first status appeared more than 20 days ago, the parcels have the status ‘collected’
         if first_date < pd.Timestamp.now()-pd.Timedelta(days=20) and random.randint(1,100) > 5:
             status_number = 5
-        # w przeciwnym wypadku zostaje wylosowany ostatni status paczki, na którym przesyłka się zatrzymała
+        # otherwise, the last parcel status at which the shipment stopped is randomly selected
         else:
             status_number = random.randint(1, 5)
         for j in range(status_number):
             status_df.loc[df_num, 'waybill'] = i
             status_df.loc[df_num, 'status'] = statuses[j]
-            # w 5% przypadków przesyłek, któryś z etapów przesyłek może trwać aż do 20 dni 
+            # in 5% of cases, one of the stages of shipment may take up to 20 days 
             if random.randint(1,100) <= 5:
                 first_date = fake.date_time_between_dates(datetime_start=first_date, datetime_end=first_date+pd.Timedelta(days=20))
-            # w przeciwnym wypadku 
+            # otherwise
             else:
-                # jeżeli paczka jest na etapie "w drodze" to czas między etapami "w drodze" a "dostarczono" wynosi 1-3 dni
+                # if the parcel is at the ‘in transit’ stage, the time between the ‘in transit’ and ‘delivered’ stages is 1-3 days
                 if j == 3:
                     first_date = fake.date_time_between_dates(datetime_start=first_date+pd.Timedelta(days=1), datetime_end=first_date+pd.Timedelta(days=3))
-                # dla każdego innego etapu czas między etapami wynosi 0-2 dni
+                # for every other stage, the time between stages is 0-2 days
                 else:
                     first_date = fake.date_time_between_dates(datetime_start=first_date, datetime_end=first_date+pd.Timedelta(days=2))
             status_df.loc[df_num, 'date'] = first_date
