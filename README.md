@@ -15,7 +15,6 @@ The generated data can be used for:
 
 
 ## Features
-
 ### Automatic table creation
 The script creates the following tables (with suffix `3`):
 - **Customers3**
@@ -27,7 +26,6 @@ The script creates the following tables (with suffix `3`):
 - **StatusToWaybills3**
 
 All tables are dropped and recreated on each run.
-
 
 ### Large-scale synthetic data generation
 The script generates:
@@ -97,7 +95,6 @@ The script will:
 - Generate all datasets
 - Create all tables
 - Insert all generated data into PostgreSQL
-
 
 
 ## Repository Structur
