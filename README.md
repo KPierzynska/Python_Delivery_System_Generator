@@ -98,9 +98,9 @@ The script will:
 
 
 ## Repository Structur
-├── create_sql_tables.py   # Main script for data generation and table creation
-├── README.md              # Project documentation
-└── requirements.txt       # Python dependencies
+- create_sql_tables.py  (Main script for data generation and table creation)
+- README.md (Project documentation)
+- requirements.txt (Python dependencies)
 
 
 
