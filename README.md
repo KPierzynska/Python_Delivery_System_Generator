@@ -1,6 +1,6 @@
 # Delivery-System-Generator
 
-## Repository Description: Python Script for Data Generation
+## Python Script for Data Generation
 
 This repository contains Python code for generating large synthetic datasets and configuring a local PostgreSQL database.  
 The script automatically creates database tables, generates realistic sample data (100,000+ records per table), and loads them into PostgreSQL using SQLAlchemy.
