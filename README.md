@@ -97,7 +97,7 @@ The script will:
 - Insert all generated data into PostgreSQL
 
 
-## Repository Structur
+## Repository Structure
 - create_sql_tables.py  (Main script for data generation and table creation)
 - README.md (Project documentation)
 - requirements.txt (Python dependencies)
